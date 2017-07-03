@@ -1,0 +1,26 @@
+functions
+ Created on: Jun 29, 2017
+     Author: amr
+     
+     
+void spi_sendfloat(float x)
+{
+  unsigned char i = 0;
+  unsigned char *xptr = (unsigned char *)&x;
+  for (i = 0; i < sizeof(float); i++)
+  {
+  //  Serial.print("Done\n");
+    SPI_sendByte(*(xptr + i));
+    
+  }
+}
+
+void SPI_sendByte(const unsigned char data)
+{
+  
+  SPDR = data; //send data by SPI
+ while(BIT_IS_CLEAR(SPSR,SPIF)){}
+
+  //wait until SPI interrupt flag=1 (data is sent correctly)
+
+}
